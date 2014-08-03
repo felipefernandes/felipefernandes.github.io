@@ -1,0 +1,12 @@
+# Site settings
+title: Felipe Fernandes Website
+email: felipefernandesweb@gmail.com
+description: "Das coisas que eu encontro nas minhas navegadas na web: ciência, tecnologia e entretenimento."
+baseurl: ""
+url: "http://felipefernandes.nu"
+twitter_username: felipefernandes
+github_username:  felipefernandes
+
+# Build settings
+markdown: kramdown
+permalink: pretty
