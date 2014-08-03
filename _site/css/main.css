@@ -14,6 +14,7 @@ body {
   line-height: 1.5;
   font-weight: 300;
   background-color: #fdfdfd;
+  padding-top: 56px;
 }
 
 h1, h2, h3, h4, h5, h6 { 
@@ -46,17 +47,24 @@ a:visited { color: #205caa; }
 /* Site header */
 
 .site-header {
-  border-top: 5px solid #333;
-  border-bottom: 1px solid #e8e8e8;
+  position: fixed;
+  border-top: 5px solid #333;  
   min-height: 56px;
-  background-color: white;
+  background-color: black;
+  color: white;
+  width: 100%;
+  top: 0;
+
+  -webkit-box-shadow: 0 5px 30px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 5px 30px 0 rgba(0,0,0,0.3);
 }
 
 .site-title,
 .site-title:hover,
 .site-title:visited {
   display: block;
-  color: #333;
+  color: #FFF;
+  font-family: 'Gloria Hallelujah', cursive;
   font-size: 26px;
   letter-spacing: -1px;
   float: left;
@@ -162,6 +170,10 @@ a:visited { color: #205caa; }
   font-size: 24px;
   letter-spacing: -1px;
   line-height: 1;
+}
+
+.post-link {
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 .posts .post-date {
