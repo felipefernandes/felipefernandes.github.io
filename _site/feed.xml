@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Felipe Fernandes Website</title>
-    <description>Das coisas que eu encontro nas minhas navegadas na web: ciência, tecnologia e entretenimento.</description>
+    <title>Felipe Fernandes</title>
+    <description>Das coisas que eu encontro nas minhas navegadas na web: tecnologia e entretenimento.</description>
     <link>http://felipefernandes.github.io/</link>
     <atom:link href="http://felipefernandes.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 03 Aug 2014 11:50:26 -0300</pubDate>
-    <lastBuildDate>Sun, 03 Aug 2014 11:50:26 -0300</lastBuildDate>
+    <pubDate>Tue, 05 Aug 2014 10:45:23 -0300</pubDate>
+    <lastBuildDate>Tue, 05 Aug 2014 10:45:23 -0300</lastBuildDate>
     <generator>Jekyll v2.2.0</generator>
+    
+      <item>
+        <title>CSS Efeito Marcatexto</title>
+        <description>&lt;p&gt;Um efeitozinho bacana que volta e meia aparece nos layouts dos designers com quem trabalho é esse efeito de marcatexto, e é bem útil em alguns casos. E para quem tá querendo saber como faz, eu achei um método bem simples usando o HTML e CSS 3, se liga só:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;No HTML vai ficar assim…&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;marcatexto&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;Lorem ipsum dolor sit&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;amet omtip gullan&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;E o CSS, assim…&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.marcatexto&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shadow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-5px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;inline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;!important&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;relative&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Bom, se você quiser trocar a cor do seu marcatexto é só mudar o &lt;strong&gt;#000&lt;/strong&gt; pelo código Hexadecimal da cor de sua preferência.&lt;/p&gt;
+
+&lt;p&gt;Molezinha, né? E aí curtiu?&lt;/p&gt;
+</description>
+        <pubDate>Tue, 05 Aug 2014 07:13:42 -0300</pubDate>
+        <link>http://felipefernandes.github.io/css/frontend/development/2014/08/05/css-efeito-marcatexto/</link>
+        <guid isPermaLink="true">http://felipefernandes.github.io/css/frontend/development/2014/08/05/css-efeito-marcatexto/</guid>
+        
+        
+        <category>css</category>
+        
+        <category>frontend</category>
+        
+        <category>development</category>
+        
+      </item>
     
       <item>
         <title>Reencontro Animado!</title>

@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Reencontro Animado!</title>
+    <title>CSS Efeito Marcatexto</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Das coisas que eu encontro nas minhas navegadas na web: tecnologia e entretenimento.">
-    <link rel="canonical" href="http://felipefernandes.github.io/jekyll/update/2014/08/03/reencontro-animado/">
+    <link rel="canonical" href="http://felipefernandes.github.io/css/frontend/development/2014/08/05/css-efeito-marcatexto/">
 
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Gloria+Hallelujah' rel='stylesheet' type='text/css'>
 
@@ -62,22 +62,33 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Reencontro Animado!</h1>
-    <p class="meta">Aug 3, 2014</p>
+    <h1>CSS Efeito Marcatexto</h1>
+    <p class="meta">Aug 5, 2014</p>
   </header>
 
   <article class="post-content">
-  <p><strong>Um doc sobre história da animação brasileira</strong></p>
+  <p>Um efeitozinho bacana que volta e meia aparece nos layouts dos designers com quem trabalho é esse efeito de marcatexto, e é bem útil em alguns casos. E para quem tá querendo saber como faz, eu achei um método bem simples usando o HTML e CSS 3, se liga só:</p>
 
-<p><img src="http://www.afronte.com.br/wp-content/uploads/2013/08/post-img-luz-anima-acao1-610x230.jpg" width="100%" /></p>
+<p><strong>No HTML vai ficar assim…</strong></p>
 
-<p>Essa semana eu vi na minha timeline do Facebook um post de um grande animador/cineasta que eu conheço, o Marão, dizendo que estava disponível no NOW, o On Demand da NET, o documentário LUZ ANIMA AÇÃO. Fui correndo lá conferir e pude mais uma vez me impressionar (e se apaixonar) por essa arte, além de ver relatos impressionantes e emocionantes dos precursores da animação aqui no Brasil. Foi bacana também saber que além do carimbado e super competente Carlos Saldanha da Blue Sky (Era do Gelo, Rio…) que temos representantes tupiniquins em vários outras produções internacionais de repercussão como Mulan, Lilo &amp; Stich e outros. Recomendadíssimo e apaixonante.</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;marcatexto&quot;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;span&gt;</span>Lorem ipsum dolor sit<span class="nt">&lt;br&gt;</span>amet omtip gullan<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;p&gt;</span></code></pre></div>
 
-<p><strong>Maratona Animada</strong></p>
+<p><strong>E o CSS, assim…</strong></p>
 
-<p>Bom pra completar meu reencontro com o mundo da animação, tive o imenso prazer de participar da equipe Oráculo (Ronaldo Oliveira, Gabriela Dreher) e submeter um filme para a MARATONA ANIMADA que tá rolando durante o AnimaMundi 2014. Confere aí o resultado:</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.marcatexto</span> <span class="p">{</span>
+	<span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="o">:</span> <span class="m">15px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">#000</span><span class="o">,</span> <span class="m">-5px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">#000</span><span class="p">;</span>
+	<span class="k">background</span><span class="o">:</span> <span class="m">#000</span><span class="p">;</span>
+	<span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="p">;</span>
+	<span class="k">left</span><span class="o">:</span><span class="m">3px</span><span class="p">;</span>
+	<span class="k">padding</span><span class="o">:</span> <span class="m">3px</span> <span class="m">0</span> <span class="cp">!important</span><span class="p">;</span>
+	<span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 
-<iframe width="800" height="400" src="//www.youtube.com/embed/3MgfdrbdCko?rel=0" frameborder="0" allowfullscreen=""></iframe>
+<p>Bom, se você quiser trocar a cor do seu marcatexto é só mudar o <strong>#000</strong> pelo código Hexadecimal da cor de sua preferência.</p>
+
+<p>Molezinha, né? E aí curtiu?</p>
 
   </article>
 
