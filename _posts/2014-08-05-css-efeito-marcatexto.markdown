@@ -20,7 +20,6 @@ Um efeitozinho bacana que volta e meia aparece nos layouts dos designers com que
 	box-shadow: 15px 0 0 0 #000, -5px 0 0 0 #000;
 	background: #000;
 	display: inline;
-	left:3px;
 	padding: 3px 0 !important;
 	position: relative;
 }
