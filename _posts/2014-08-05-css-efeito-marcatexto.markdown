@@ -25,6 +25,8 @@ Um efeitozinho bacana que volta e meia aparece nos layouts dos designers com que
 }
 {% endhighlight %}
 
+E [aqui](http://codepen.io/anon/pen/DcmCd) você pode ver funcionando.
+
 Bom, se você quiser trocar a cor do seu marcatexto é só mudar o **#000** pelo código Hexadecimal da cor de sua preferência.
 
 Molezinha, né? E aí curtiu?
