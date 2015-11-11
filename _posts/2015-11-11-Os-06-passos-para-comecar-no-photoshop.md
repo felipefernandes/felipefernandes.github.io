@@ -11,18 +11,15 @@ Há alguns anos eu tenho dado aula de Web Design e para ajudar meus alunos a est
 
 Bom, mas chega de papo e vamos ao o que interessa!
 
-1. Visão geral da Ferramenta
-----------------------------
+**1. Visão geral da Ferramenta**
 Nesse link fala sobre a interface da ferramenta, como ela está organizada.
 http://www.cafecomphotoshop.com.br/photoshop-para-iniciantes-conhecendo-o-basico/
 
-2. Funcionamento das camadas
-----------------------------
+**2. Funcionamento das camadas**
 Compreenção sobre camadas é basicamente o conceito central para trabalhar com o Photoshop.
 https://www.youtube.com/watch?v=RzBpLM6rppg
 
-3. Ferramentas de Seleção e Recorte (básico)
-----------------------------
+**3. Ferramentas de Seleção e Recorte (básico)**
 Para você começar a fazer suas montagens, colagens, além de muitas outras operações conhecer os recursos de seleção e recorte são uma mão na roda.
 https://www.youtube.com/watch?v=6xpOsHR9uzI
 
@@ -30,17 +27,16 @@ https://www.youtube.com/watch?v=6xpOsHR9uzI
 > Crie um personagem utilizando os arquivos disponíveis nos links http://bit.ly/1kg4Wiw e https://goo.gl/dMbOn9
 
 
-4. Máscaras
-----------------------------
+**4. Máscaras**
 https://www.youtube.com/watch?v=qyVMFeY--1I
 https://www.youtube.com/watch?v=wrrGs4_4y8o
 https://www.youtube.com/watch?v=lmsQCb_whGw (recortes profissionais, canais)
 
 
-5. Correção de cores
-----------------------------
+**5. Correção de cores**
 http://www.cafecomphotoshop.com.br/retoque-correcao-de-cores-em-tres-passos/
 extra: http://www.cafecomphotoshop.com.br/como-mudar-a-cor-dos-olhos/
+
 
 > **Exercicio #2:**
   ##### Banner Agência de Turismo
@@ -62,8 +58,7 @@ extra: http://www.cafecomphotoshop.com.br/como-mudar-a-cor-dos-olhos/
   - Formato do banners: __300x600__ e __970x90__
 
 
-6. Grids
-----------------------------
+**6. Grids**
 Instalando plugin de grids no photoshop, e utilização de grids
 http://tableless.com.br/usando-o-plugin-960gs-e-o-photoshop/
 
