@@ -46,4 +46,14 @@ const talks = defineCollection({
   }),
 });
 
-export const collections = { projects, articles, talks };
+const archive = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    categories: z.array(z.string()),
+    description: z.string(),
+  }),
+});
+
+export const collections = { projects, articles, talks, archive };

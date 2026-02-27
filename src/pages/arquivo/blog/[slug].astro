@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import ArchiveLayout from '../../../layouts/ArchiveLayout.astro';
+
+export async function getStaticPaths() {
+  const archivePosts = await getCollection('archive');
+  return archivePosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<'archive'>;
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<ArchiveLayout
+  title={post.data.title}
+  date={post.data.date}
+  categories={post.data.categories}
+>
+  <Content />
+</ArchiveLayout>

@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/ui/Card.astro';
+
+const archivePosts = await getCollection('archive');
+const sortedPosts = archivePosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="Arquivo - Posts Antigos"
+  description="Posts do antigo blog (2014-2015) mantidos para fins de arquivo histórico"
+>
+  <section class="py-20 bg-bg-primary min-h-screen">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-4xl mx-auto mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          <svg class="w-8 h-8 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+          </svg>
+          <h1 class="text-3xl lg:text-5xl font-display font-bold text-white">
+            Arquivo
+          </h1>
+        </div>
+        <p class="text-white/60 leading-relaxed">
+          Posts do antigo blog (2014-2015) mantidos para fins de arquivo histórico. O conteúdo pode estar desatualizado.
+        </p>
+      </div>
+
+      <!-- Archive Posts -->
+      <div class="max-w-4xl mx-auto space-y-6">
+        {sortedPosts.map((post) => {
+          const formattedDate = post.data.date.toLocaleDateString('pt-BR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+
+          return (
+            <Card href={`/arquivo/blog/${post.slug}`} hoverable={true} class="group">
+              <div class="flex flex-col">
+                <!-- Header -->
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex-1">
+                    <h2 class="text-xl font-display font-bold text-white group-hover:text-white/90 transition-colors mb-2">
+                      {post.data.title}
+                    </h2>
+                    <time class="text-xs text-white/40 font-mono">
+                      {formattedDate}
+                    </time>
+                  </div>
+                  <svg class="w-5 h-5 text-white/40 group-hover:text-white/60 group-hover:translate-x-1 transition-all flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </div>
+
+                <!-- Description -->
+                <p class="text-white/70 text-sm leading-relaxed mb-4">
+                  {post.data.description}
+                </p>
+
+                <!-- Categories -->
+                <div class="flex flex-wrap gap-2">
+                  {post.data.categories.map((category) => (
+                    <span class="px-2 py-1 text-xs font-mono uppercase tracking-wider bg-white/5 border border-white/10 rounded-full text-white/60">
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+
+      <!-- Back Link -->
+      <div class="max-w-4xl mx-auto mt-12">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Voltar para a home
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
