@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '../content/ProjectCard.astro';
+import Button from '../ui/Button.astro';
+
+const projects = await getCollection('projects');
+const featuredProjects = projects
+  .filter(p => p.data.featured)
+  .sort((a, b) => (a.data.order || 999) - (b.data.order || 999))
+  .slice(0, 3);
+---
+
+<section class="py-20 bg-bg-darker">
+  <div class="container-custom">
+    <!-- Section Title -->
+    <div class="max-w-4xl mx-auto text-center mb-12">
+      <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-4">
+        Projetos em Destaque
+      </h2>
+      <p class="text-white/60 leading-relaxed">
+        Uma seleção dos meus projetos mais recentes em AI automation, agilidade e game production
+      </p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+      {featuredProjects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          status={project.data.status}
+          slug={project.slug}
+          featured={project.data.featured}
+        />
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <Button href="/projetos" variant="secondary" size="lg">
+        Ver Todos os Projetos
+      </Button>
+    </div>
+  </div>
+</section>

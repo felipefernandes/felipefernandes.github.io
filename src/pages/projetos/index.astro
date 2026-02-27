@@ -1,0 +1,160 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/content/ProjectCard.astro';
+
+const projects = await getCollection('projects');
+
+// Sort by order, then by year (descending)
+const sortedProjects = projects.sort((a, b) => {
+  if (a.data.order !== undefined && b.data.order !== undefined) {
+    return a.data.order - b.data.order;
+  }
+  return b.data.year - a.data.year;
+});
+
+// Get all unique tags
+const allTags = [...new Set(projects.flatMap(p => p.data.tags))].sort();
+---
+
+<BaseLayout
+  title="Projetos | Felipe Fernandes"
+  description="Projetos de AI Automation, Agile Ops e Game Production desenvolvidos por Felipe Fernandes"
+>
+  <main class="pt-24 pb-20">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-4xl mx-auto text-center mb-16">
+        <h1 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">
+          Projetos
+        </h1>
+        <p class="text-xl text-white/60 leading-relaxed">
+          Uma seleção de projetos pessoais e profissionais que refletem minha abordagem:
+          automatizar o repetitivo, simplificar o complexo e usar IA como extensão prática do trabalho.
+        </p>
+      </div>
+
+      <!-- Filter by tags (simple version without React) -->
+      <div class="max-w-6xl mx-auto mb-12">
+        <div class="flex flex-wrap gap-2 justify-center">
+          <span class="text-sm text-white/40 font-mono uppercase tracking-wider self-center mr-2">
+            Filtrar:
+          </span>
+          {allTags.map((tag) => (
+            <button
+              data-tag={tag}
+              class="filter-tag px-3 py-1 text-xs font-mono uppercase tracking-wider bg-white/5 border border-white/20 rounded-full text-white/60 hover:bg-white/10 hover:text-white hover:border-white/30 transition-all"
+            >
+              {tag}
+            </button>
+          ))}
+          <button
+            id="clear-filter"
+            class="px-3 py-1 text-xs font-mono uppercase tracking-wider text-white/40 hover:text-white transition-colors"
+          >
+            Limpar
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" id="projects-grid">
+        {sortedProjects.map((project) => (
+          <div class="project-card contents" data-tags={JSON.stringify(project.data.tags)}>
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              tags={project.data.tags}
+              status={project.data.status}
+              slug={project.slug}
+              featured={project.data.featured}
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty state (hidden by default) -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <p class="text-white/40 text-lg font-mono">
+          Nenhum projeto encontrado com essa tag.
+        </p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  // Simple tag filtering
+  const filterTags = document.querySelectorAll('.filter-tag');
+  const clearButton = document.getElementById('clear-filter');
+  const projectCards = document.querySelectorAll('.project-card');
+  const emptyState = document.getElementById('empty-state');
+
+  let activeTag: string | null = null;
+
+  filterTags.forEach((button) => {
+    button.addEventListener('click', () => {
+      const tag = button.getAttribute('data-tag');
+
+      // Toggle active state
+      if (activeTag === tag) {
+        activeTag = null;
+        button.classList.remove('bg-white/20', 'border-white/40', 'text-white');
+        button.classList.add('bg-white/5', 'border-white/20', 'text-white/60');
+      } else {
+        // Remove active from all buttons
+        filterTags.forEach((btn) => {
+          btn.classList.remove('bg-white/20', 'border-white/40', 'text-white');
+          btn.classList.add('bg-white/5', 'border-white/20', 'text-white/60');
+        });
+
+        // Add active to clicked button
+        activeTag = tag;
+        button.classList.add('bg-white/20', 'border-white/40', 'text-white');
+        button.classList.remove('bg-white/5', 'border-white/20', 'text-white/60');
+      }
+
+      filterProjects();
+    });
+  });
+
+  clearButton?.addEventListener('click', () => {
+    activeTag = null;
+    filterTags.forEach((btn) => {
+      btn.classList.remove('bg-white/20', 'border-white/40', 'text-white');
+      btn.classList.add('bg-white/5', 'border-white/20', 'text-white/60');
+    });
+    filterProjects();
+  });
+
+  function filterProjects() {
+    let visibleCount = 0;
+
+    projectCards.forEach((card) => {
+      const tagsAttr = card.getAttribute('data-tags');
+      if (!tagsAttr) return;
+
+      const tags = JSON.parse(tagsAttr);
+
+      if (!activeTag || tags.includes(activeTag)) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // Show/hide empty state
+    if (visibleCount === 0) {
+      emptyState?.classList.remove('hidden');
+    } else {
+      emptyState?.classList.add('hidden');
+    }
+  }
+</script>
+
+<style>
+  .filter-tag {
+    cursor: pointer;
+  }
+</style>

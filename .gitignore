@@ -1,0 +1,28 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.production
+
+# MacOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Project specific
+.refs/*
+.drafts/*
+.claude/local-settings.json
+
+# Old Jekyll files (keeping for reference during migration)
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata

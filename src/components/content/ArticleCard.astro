@@ -1,0 +1,86 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  publishedAt: Date;
+  platform: 'medium' | 'book' | 'blog';
+  tags: string[];
+  url?: string;
+  featured?: boolean;
+}
+
+const { title, description, publishedAt, platform, tags, url, featured = false } = Astro.props;
+
+const platformLabels = {
+  medium: 'Medium',
+  book: 'Livro',
+  blog: 'Blog',
+};
+
+const platformIcons = {
+  medium: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 13.5v-7l6 3.5-6 3.5z"/>',
+  book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  blog: '<path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/><path d="M14 17H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>',
+};
+
+const formattedDate = publishedAt.toLocaleDateString('pt-BR', {
+  year: 'numeric',
+  month: 'short',
+});
+---
+
+<Card href={url} hoverable={!!url} class="group">
+  <div class="flex flex-col h-full">
+    <!-- Header -->
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <svg class="w-5 h-5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
+          <Fragment set:html={platformIcons[platform]} />
+        </svg>
+        <span class="text-xs font-mono uppercase tracking-wider text-white/40">
+          {platformLabels[platform]}
+        </span>
+      </div>
+      {featured && (
+        <span class="px-2 py-1 text-xs font-mono uppercase tracking-wider bg-white/10 border border-white/20 rounded-full text-white/80">
+          Destaque
+        </span>
+      )}
+    </div>
+
+    <!-- Title -->
+    <h3 class="text-xl font-display font-bold text-white group-hover:text-white/90 transition-colors mb-3">
+      {title}
+    </h3>
+
+    <!-- Description -->
+    <p class="text-white/70 text-sm leading-relaxed mb-4 flex-grow">
+      {description}
+    </p>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      {tags.slice(0, 3).map((tag) => (
+        <Badge variant="default">{tag}</Badge>
+      ))}
+      {tags.length > 3 && (
+        <span class="text-xs text-white/40 font-mono self-center">
+          +{tags.length - 3}
+        </span>
+      )}
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+      <span class="text-xs text-white/40 font-mono">
+        {formattedDate}
+      </span>
+      <svg class="w-4 h-4 text-white/40 group-hover:text-white/60 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </div>
+  </div>
+</Card>

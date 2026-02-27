@@ -1,0 +1,22 @@
+---
+export interface Props {
+  variant?: 'default' | 'subtle';
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  class: className = '',
+} = Astro.props;
+
+const variantClasses = {
+  default: 'bg-white/5 border-white/20 text-white/80',
+  subtle: 'bg-white/10 border-white/30 text-white',
+};
+
+const classes = `inline-flex items-center px-2 py-1 text-xs font-mono uppercase tracking-wider rounded-full border ${variantClasses[variant]} ${className}`;
+---
+
+<span class={classes}>
+  <slot />
+</span>

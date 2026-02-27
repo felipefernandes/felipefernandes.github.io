@@ -1,0 +1,72 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  status: 'open-source' | 'saas' | 'internal' | 'archived';
+  slug: string;
+  featured?: boolean;
+}
+
+const { title, description, tags, status, slug, featured = false } = Astro.props;
+
+const statusLabels = {
+  'open-source': 'Open Source',
+  'saas': 'SaaS',
+  'internal': 'Interno',
+  'archived': 'Arquivado',
+};
+
+const statusColors = {
+  'open-source': 'text-white',
+  'saas': 'text-white',
+  'internal': 'text-white/60',
+  'archived': 'text-white/40',
+};
+---
+
+<Card href={`/projetos/${slug}`} hoverable={true} class="group">
+  <div class="flex flex-col">
+    <!-- Header -->
+    <div class="flex items-start justify-between mb-4">
+      <h3 class="text-xl font-display font-bold text-white group-hover:text-white/90 transition-colors">
+        {title}
+      </h3>
+      {featured && (
+        <span class="ml-2 px-2 py-1 text-xs font-mono uppercase tracking-wider bg-white/10 border border-white/20 rounded-full text-white/80">
+          Destaque
+        </span>
+      )}
+    </div>
+
+    <!-- Description -->
+    <p class="text-white/70 text-sm leading-relaxed mb-4">
+      {description}
+    </p>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      {tags.slice(0, 4).map((tag) => (
+        <Badge variant="default">{tag}</Badge>
+      ))}
+      {tags.length > 4 && (
+        <span class="text-xs text-white/40 font-mono self-center">
+          +{tags.length - 4}
+        </span>
+      )}
+    </div>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+      <span class={`text-xs font-mono uppercase tracking-wider ${statusColors[status]}`}>
+        {statusLabels[status]}
+      </span>
+      <svg class="w-4 h-4 text-white/40 group-hover:text-white/60 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </div>
+  </div>
+</Card>

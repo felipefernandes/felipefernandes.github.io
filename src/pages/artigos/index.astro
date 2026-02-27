@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/content/ArticleCard.astro';
+
+const articles = await getCollection('articles');
+
+// Sort by publishedAt (descending), featured first
+const sortedArticles = articles.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return b.data.publishedAt.getTime() - a.data.publishedAt.getTime();
+});
+
+// Separate book and articles
+const book = sortedArticles.filter(a => a.data.platform === 'book');
+const mediumArticles = sortedArticles.filter(a => a.data.platform === 'medium');
+const blogArticles = sortedArticles.filter(a => a.data.platform === 'blog');
+---
+
+<BaseLayout
+  title="Artigos & Publicações | Felipe Fernandes"
+  description="Artigos sobre agilidade, automação com IA, produtividade e liderança por Felipe Fernandes"
+>
+  <main class="pt-24 pb-20">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-4xl mx-auto text-center mb-16">
+        <h1 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">
+          Artigos & Publicações
+        </h1>
+        <p class="text-xl text-white/60 leading-relaxed">
+          Escrevo sobre agilidade, automação com IA, produtividade e liderança.
+          Conhecimento que não circula, enferruja.
+        </p>
+      </div>
+
+      <!-- Book Section (if exists) -->
+      {book.length > 0 && (
+        <section class="mb-20">
+          <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-8 text-center">
+            Livro
+          </h2>
+          <div class="max-w-3xl mx-auto">
+            {book.map((article) => (
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                publishedAt={article.data.publishedAt}
+                platform={article.data.platform}
+                tags={article.data.tags}
+                url={article.data.url}
+                featured={article.data.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Medium Articles -->
+      {mediumArticles.length > 0 && (
+        <section class="mb-20">
+          <div class="max-w-4xl mx-auto mb-8">
+            <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-4">
+              Artigos no Medium
+            </h2>
+            <p class="text-white/60">
+              Publicações sobre agilidade, IA, automação e produtividade.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {mediumArticles.map((article) => (
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                publishedAt={article.data.publishedAt}
+                platform={article.data.platform}
+                tags={article.data.tags}
+                url={article.data.url}
+                featured={article.data.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Blog Articles (if exists) -->
+      {blogArticles.length > 0 && (
+        <section>
+          <div class="max-w-4xl mx-auto mb-8">
+            <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-4">
+              Blog
+            </h2>
+            <p class="text-white/60">
+              Artigos e tutoriais publicados neste site.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {blogArticles.map((article) => (
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                publishedAt={article.data.publishedAt}
+                platform={article.data.platform}
+                tags={article.data.tags}
+                url={article.data.url}
+                featured={article.data.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- CTA -->
+      <div class="mt-20 pt-12 border-t border-white/10 text-center max-w-3xl mx-auto">
+        <p class="text-white/60 mb-6">
+          Gostou do conteúdo? Acompanhe minhas publicações no Medium ou entre em contato.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://medium.com/@felipefernandes"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-white text-bg-primary hover:bg-white/90 transition-all rounded-lg font-mono uppercase text-sm tracking-wider"
+          >
+            Seguir no Medium
+          </a>
+          <a
+            href="/contato"
+            class="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white hover:bg-white/5 hover:border-white/40 transition-all rounded-lg font-mono uppercase text-sm tracking-wider"
+          >
+            Entre em Contato
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,82 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/sobre', label: 'sobre' },
+  { href: '/projetos', label: 'projetos' },
+  { href: '/contato', label: 'contato' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-bg-darker/80 backdrop-blur-md border-b border-white/10">
+  <nav class="container-custom">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo/Nome -->
+      <a
+        href="/"
+        class="text-xl font-display font-bold text-white hover:text-white/80 transition-colors duration-300"
+      >
+        Felipe Fernandes
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6">
+        {navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class={`
+              text-sm font-mono uppercase tracking-wider transition-colors duration-300
+              ${currentPath.startsWith(href)
+                ? 'text-white'
+                : 'text-white/60 hover:text-white'
+              }
+            `}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 text-white hover:text-white/80 transition-colors"
+        aria-label="Toggle mobile menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col gap-3">
+        {navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class={`
+              text-sm font-mono uppercase tracking-wider transition-colors duration-300 py-2
+              ${currentPath.startsWith(href)
+                ? 'text-white'
+                : 'text-white/60 hover:text-white'
+              }
+            `}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

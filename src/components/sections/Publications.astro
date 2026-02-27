@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../content/ArticleCard.astro';
+import Button from '../ui/Button.astro';
+
+const articles = await getCollection('articles');
+const featuredArticles = articles
+  .filter(a => a.data.featured)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 3);
+---
+
+<section class="py-20 bg-bg-primary">
+  <div class="container-custom">
+    <!-- Section Title -->
+    <div class="max-w-4xl mx-auto text-center mb-12">
+      <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-4">
+        Publicações
+      </h2>
+      <p class="text-white/60 leading-relaxed">
+        Artigos sobre agilidade, automação com IA, produtividade e liderança
+      </p>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+      {featuredArticles.map((article) => (
+        <ArticleCard
+          title={article.data.title}
+          description={article.data.description}
+          publishedAt={article.data.publishedAt}
+          platform={article.data.platform}
+          tags={article.data.tags}
+          url={article.data.url}
+          featured={article.data.featured}
+        />
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <Button href="/artigos" variant="secondary" size="lg">
+        Ver Todas as Publicações
+      </Button>
+    </div>
+  </div>
+</section>
