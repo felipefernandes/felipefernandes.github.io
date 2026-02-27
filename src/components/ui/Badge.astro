@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  variant?: 'default' | 'subtle';
+  variant?: 'default' | 'subtle' | 'highlight-cyan' | 'highlight-purple' | 'featured';
   class?: string;
 }
 
@@ -12,6 +12,9 @@ const {
 const variantClasses = {
   default: 'bg-white/5 border-white/20 text-white/80',
   subtle: 'bg-white/10 border-white/30 text-white',
+  'highlight-cyan': 'bg-[#51d6f9]/10 border-[#51d6f9]/30 text-[#51d6f9]',
+  'highlight-purple': 'bg-[#6303f3]/10 border-[#6303f3]/30 text-[#6303f3]',
+  'featured': 'bg-[#6303f3]/20 border-[#6303f3]/40 text-white shadow-glow-purple',
 };
 
 const classes = `inline-flex items-center px-2 py-1 text-xs font-mono uppercase tracking-wider rounded-full border ${variantClasses[variant]} ${className}`;

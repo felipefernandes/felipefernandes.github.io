@@ -1,14 +1,14 @@
 export const techStack = {
   ai: [
-    { name: 'Claude (Anthropic)', category: 'AI & LLMs' },
-    { name: 'GPT-4o', category: 'AI & LLMs' },
-    { name: 'Gemini', category: 'AI & LLMs' },
-    { name: 'Prompt Engineering', category: 'AI & LLMs' },
+    { name: 'Claude (Anthropic)', category: 'AI & LLMs', highlight: 'purple' },
+    { name: 'GPT-4o', category: 'AI & LLMs', highlight: 'purple' },
+    { name: 'Gemini', category: 'AI & LLMs', highlight: 'purple' },
+    { name: 'Prompt Engineering', category: 'AI & LLMs', highlight: 'cyan' },
     { name: 'Atlassian ROVO', category: 'AI & LLMs' },
   ],
   automation: [
     { name: 'Python', category: 'Automação' },
-    { name: 'n8n', category: 'Automação' },
+    { name: 'n8n', category: 'Automação', highlight: 'cyan' },
     { name: 'Google Apps Script', category: 'Automação' },
     { name: 'JIRA Automations', category: 'Automação' },
   ],
@@ -31,7 +31,7 @@ export const techStack = {
     { name: 'WordPress', category: 'Frontend' },
   ],
   management: [
-    { name: 'Kanban', category: 'Gestão' },
+    { name: 'Kanban', category: 'Gestão', highlight: 'cyan' },
     { name: 'OKRs', category: 'Gestão' },
     { name: 'ProductOps', category: 'Gestão' },
     { name: 'Micro SaaS', category: 'Gestão' },

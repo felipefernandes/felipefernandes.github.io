@@ -20,13 +20,8 @@ export const socialLinks = [
     username: 'felipefernandesweb@gmail.com',
   },
   {
-    name: 'WhatsApp',
-    url: 'https://wa.me/5521981184116',
-    username: '+55 21 98118-4116',
-  },
-  {
     name: 'Telegram',
-    url: 'https://t.me/+5521981184116',
-    username: '+55 21 98118-4116',
+    url: 'https://t.me/felipefernandesweb',
+    username: '@felipefernandesweb',
   },
 ];

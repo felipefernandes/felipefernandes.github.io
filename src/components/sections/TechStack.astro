@@ -18,9 +18,15 @@ const technologies = getAllTechnologies();
     <!-- Tech Grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
       {technologies.map((tech) => {
+        const variant = tech.highlight === 'cyan'
+          ? 'highlight-cyan'
+          : tech.highlight === 'purple'
+          ? 'highlight-purple'
+          : 'default';
+
         return (
           <div class="flex items-center justify-center">
-            <Badge variant="default">
+            <Badge variant={variant}>
               {tech.name}
             </Badge>
           </div>
