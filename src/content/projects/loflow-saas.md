@@ -26,7 +26,7 @@ Gerenciei o ciclo completo do produto: da concepção e código (AI-assisted) à
 ## Resultados
 
 - **+30 usuários registrados**
-- Desenvolvimento com vibe coding (AI-assisted)
+- Desenvolvimento com práticas de AI-Augmented Development (AI-assisted)
 - Trilhas sonoras proprietárias
 
 ## Acesse

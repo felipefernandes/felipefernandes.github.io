@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/felipefernandes/felipefernandes.github.io#readme",
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/react": "^4.4.2",
     "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/typography": "^0.5.19",
@@ -31,6 +32,7 @@
     "lucide-react": "^0.575.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
   }
 }
