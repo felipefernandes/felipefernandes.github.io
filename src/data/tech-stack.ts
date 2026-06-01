@@ -1,14 +1,23 @@
-export const techStack = {
+export interface TechItem {
+  name: string;
+  category: string;
+  highlight?: 'cyan' | 'purple';
+}
+
+export const techStack: Record<string, TechItem[]> = {
   ai: [
     { name: 'Claude (Anthropic)', category: 'AI & LLMs', highlight: 'purple' },
     { name: 'GPT-4o', category: 'AI & LLMs', highlight: 'purple' },
     { name: 'Gemini', category: 'AI & LLMs', highlight: 'purple' },
-    { name: 'Prompt Engineering', category: 'AI & LLMs', highlight: 'cyan' },
+    { name: 'Agentic Systems', category: 'AI & LLMs', highlight: 'cyan' },
+    { name: 'LLM Pipelines', category: 'AI & LLMs', highlight: 'cyan' },
+    { name: 'Prompt Engineering', category: 'AI & LLMs' },
     { name: 'Atlassian ROVO', category: 'AI & LLMs' },
   ],
   automation: [
     { name: 'Python', category: 'Automação' },
     { name: 'n8n', category: 'Automação', highlight: 'cyan' },
+    { name: 'Workflow Automation', category: 'Automação', highlight: 'cyan' },
     { name: 'Google Apps Script', category: 'Automação' },
     { name: 'JIRA Automations', category: 'Automação' },
   ],
@@ -38,6 +47,6 @@ export const techStack = {
   ],
 };
 
-export const getAllTechnologies = () => {
+export const getAllTechnologies = (): TechItem[] => {
   return Object.values(techStack).flat();
 };
