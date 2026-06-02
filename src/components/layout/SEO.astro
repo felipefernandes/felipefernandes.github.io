@@ -44,7 +44,7 @@ const imageURL = new URL(image, Astro.site);
 <meta property="twitter:image" content={imageURL} />
 
 <!-- JSON-LD Structured Data -->
-<script type="application/ld+json" set:html={JSON.stringify({
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Felipe Fernandes",

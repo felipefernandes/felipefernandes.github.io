@@ -38,7 +38,7 @@ const { title, description, image, type, publishedTime, tags } = Astro.props;
     />
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30968224-3"></script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=UA-30968224-3"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
