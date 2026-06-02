@@ -16,7 +16,7 @@
   }
 
   body {
-    @apply bg-bg-primary text-white font-sans antialiased;
+    @apply bg-bg-darker text-white font-sans antialiased;
   }
 
   /* Custom scrollbar */
