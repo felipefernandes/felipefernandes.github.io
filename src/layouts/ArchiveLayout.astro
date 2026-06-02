@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
 
 export interface Props {
   title: string;
@@ -9,7 +10,11 @@ export interface Props {
 
 const { title, date, categories } = Astro.props;
 
-const formattedDate = date.toLocaleDateString('pt-BR', {
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const formattedDate = date.toLocaleDateString(lang === 'en' ? 'en-US' : 'pt-BR', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
@@ -17,8 +22,8 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
 ---
 
 <BaseLayout
-  title={`${title} - Arquivo`}
-  description="Post arquivado do antigo blog (2014-2015)"
+  title={`${title} - ${t('archive.title')}`}
+  description={t('archive.subtitle')}
 >
   <article class="py-20 bg-bg-primary">
     <div class="container-custom max-w-4xl mx-auto">
@@ -30,10 +35,10 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
           </svg>
           <div>
             <h3 class="text-sm font-mono uppercase tracking-wider text-white/80 mb-2">
-              Conteúdo Arquivado
+              {t('archive.banner.title')}
             </h3>
             <p class="text-sm text-white/60 leading-relaxed">
-              Este artigo foi publicado em {formattedDate} no antigo blog. O conteúdo pode estar desatualizado e é mantido apenas para fins de arquivo histórico.
+              {t('archive.banner.text').replace('{date}', formattedDate)}
             </p>
           </div>
         </div>
@@ -64,13 +69,13 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
       <!-- Back Link -->
       <div class="mt-12 pt-8 border-t border-white/10">
         <a
-          href="/arquivo"
+          href={translatePath('/arquivo')}
           class="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
-          Voltar para o arquivo
+          {t('archive.back')}
         </a>
       </div>
     </div>

@@ -1,33 +1,38 @@
 ---
 import Button from '../ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <section class="min-h-screen flex items-center justify-center bg-transparent py-20">
   <div class="container-custom text-center">
     <!-- Subtitle -->
     <p class="text-sm lg:text-base text-white/50 mb-6 font-mono uppercase tracking-wider">
-      AI Solutions Engineer & Architect · Agentic Systems · LLM Pipelines · Automação de Fluxos de Trabalho
+      {t('hero.subtitle')}
     </p>
 
     <!-- Main Tagline -->
     <h1 class="text-4xl sm:text-5xl lg:text-7xl font-display font-bold leading-tight mb-8">
-      <span class="text-white block mb-2">Transformo</span>
-      <span class="text-white/80 block mb-2">complexidade operacional</span>
-      <span class="text-white block">em sistemas <span class="text-neon-cyan">simples</span></span>
+      <span class="text-white block mb-2">{t('hero.tagline.1')}</span>
+      <span class="text-white/80 block mb-2">{t('hero.tagline.2')}</span>
+      <span class="text-white block">{t('hero.tagline.3')} <span class="text-neon-cyan">{t('hero.tagline.4')}</span></span>
     </h1>
 
     <!-- Description -->
     <p class="text-lg lg:text-xl text-white/50 max-w-3xl mx-auto mb-12 leading-relaxed">
-      Especialista em arquitetar e implantar sistemas baseados em agentes autônomos e fluxos inteligentes de automação de processos, combinando excelência técnica com alta eficiência operacional.
+      {t('hero.description')}
     </p>
 
     <!-- CTAs -->
     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-      <Button href="/projetos" variant="primary" size="lg">
-        Ver Projetos
+      <Button href={translatePath('/projetos')} variant="primary" size="lg">
+        {t('hero.cta.projects')}
       </Button>
-      <Button href="/contato" variant="secondary" size="lg">
-        Fale Comigo
+      <Button href={translatePath('/contato')} variant="secondary" size="lg">
+        {t('hero.cta.contact')}
       </Button>
     </div>
 

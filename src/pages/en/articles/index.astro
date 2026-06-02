@@ -1,0 +1,164 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleCard from '../../../components/content/ArticleCard.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Filtra artigos em inglês
+const articles = await getCollection('articles', ({ data }) => {
+  return data.lang === 'en';
+});
+
+// Sort by publishedAt (descending), featured first
+const sortedArticles = articles.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return b.data.publishedAt.getTime() - a.data.publishedAt.getTime();
+});
+
+// Separate book and articles
+const book = sortedArticles.filter(a => a.data.platform === 'book');
+const mediumArticles = sortedArticles.filter(a => a.data.platform === 'medium');
+const blogArticles = sortedArticles.filter(a => a.data.platform === 'blog');
+
+const labelBook = lang === 'en' ? 'Book' : 'Livro';
+const labelMediumTitle = lang === 'en' ? 'Medium Articles' : 'Artigos no Medium';
+const labelMediumDesc = lang === 'en' ? 'Publications on AI engineering (Agentic Systems, LLM Pipelines), automation and agility.' : 'Publicações sobre engenharia de IA (Agentic Systems, LLM Pipelines), automações e agilidade.';
+const labelBlogTitle = lang === 'en' ? 'Blog' : 'Blog';
+const labelBlogDesc = lang === 'en' ? 'Articles and tutorials published on this site.' : 'Artigos e tutoriais publicados neste site.';
+const labelCtaText = lang === 'en' ? 'Liked the content? Follow my publications on Medium or get in touch.' : 'Gostou do conteúdo? Acompanhe minhas publicações no Medium ou entre em contato.';
+const labelCtaFollow = lang === 'en' ? 'Follow on Medium' : 'Seguir no Medium';
+---
+
+<BaseLayout
+  title={`${t('articles.page.title')} | Felipe Fernandes`}
+  description={t('articles.page.subtitle')}
+>
+  <main class="pt-24 pb-20">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-4xl mx-auto text-center mb-16">
+        <h1 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">
+          {t('articles.page.title')}
+        </h1>
+        <p class="text-xl text-white/60 leading-relaxed">
+          {t('articles.page.subtitle')}
+        </p>
+      </div>
+
+      <!-- Book Section -->
+      {book.length > 0 && (
+        <section class="mb-20">
+          <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-8 text-center">
+            {labelBook}
+          </h2>
+          <div class="max-w-3xl mx-auto">
+            {book.map((article) => (
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                publishedAt={article.data.publishedAt}
+                platform={article.data.platform}
+                tags={article.data.tags}
+                url={article.data.url}
+                featured={article.data.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Medium Articles -->
+      {mediumArticles.length > 0 && (
+        <section class="mb-20">
+          <div class="max-w-4xl mx-auto mb-8">
+            <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-4">
+              {labelMediumTitle}
+            </h2>
+            <p class="text-white/60">
+              {labelMediumDesc}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {mediumArticles.map((article) => (
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                publishedAt={article.data.publishedAt}
+                platform={article.data.platform}
+                tags={article.data.tags}
+                url={article.data.url}
+                featured={article.data.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Blog Articles -->
+      {blogArticles.length > 0 && (
+        <section>
+          <div class="max-w-4xl mx-auto mb-8">
+            <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-4">
+              {labelBlogTitle}
+            </h2>
+            <p class="text-white/60">
+              {labelBlogDesc}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {blogArticles.map((article) => (
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                publishedAt={article.data.publishedAt}
+                platform={article.data.platform}
+                tags={article.data.tags}
+                url={article.data.url}
+                featured={article.data.featured}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Empty state if nothing matches -->
+      {sortedArticles.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-white/40 text-lg font-mono">
+            {t('articles.empty')}
+          </p>
+        </div>
+      )}
+
+      <!-- CTA -->
+      <div class="mt-20 pt-12 border-t border-white/10 text-center max-w-3xl mx-auto">
+        <p class="text-white/60 mb-6">
+          {labelCtaText}
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://medium.com/@felipefernandes"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-white text-bg-primary hover:bg-white/90 transition-all rounded-lg font-mono uppercase text-sm tracking-wider"
+          >
+            {labelCtaFollow}
+          </a>
+          <a
+            href={translatePath('/contato')}
+            class="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white hover:bg-white/5 hover:border-white/40 transition-all rounded-lg font-mono uppercase text-sm tracking-wider"
+          >
+            {t('project.cta.contact')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

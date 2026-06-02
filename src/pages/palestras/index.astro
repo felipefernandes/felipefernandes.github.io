@@ -3,8 +3,16 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TalkCard from '../../components/content/TalkCard.astro';
 import Button from '../../components/ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const talks = await getCollection('talks');
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Filtra palestras em português
+const talks = await getCollection('talks', ({ data }) => {
+  return data.lang === 'pt-BR' || !data.lang;
+});
 
 // Sort by date (descending)
 const sortedTalks = talks.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -13,22 +21,29 @@ const sortedTalks = talks.sort((a, b) => b.data.date.getTime() - a.data.date.get
 const talksList = sortedTalks.filter(t => t.data.type === 'talk');
 const workshops = sortedTalks.filter(t => t.data.type === 'workshop');
 const mentorships = sortedTalks.filter(t => t.data.type === 'mentorship');
+
+const labelTalks = lang === 'en' ? 'Talks' : 'Palestras';
+const labelWorkshops = lang === 'en' ? 'Workshops' : 'Workshops';
+const labelMentorships = lang === 'en' ? 'Mentoring & Community' : 'Mentorias';
+const labelCtaTitle = lang === 'en' ? 'Interested in talks or mentoring?' : 'Interessado em palestras ou mentoria?';
+const labelCtaDesc = lang === 'en' 
+  ? 'I work with themes such as AI engineering, agentic systems, process automation, flow metrics, and AI governance. Get in touch to discuss how I can help your team or event.'
+  : 'Trabalho com temas como engenharia de IA, agentic systems, automação de processos, flow metrics e governança de IA. Entre em contato para conversarmos sobre como posso ajudar seu time ou evento.';
 ---
 
 <BaseLayout
-  title="Palestras & Mentorias | Felipe Fernandes"
-  description="Palestras, workshops e mentorias sobre engenharia de IA, agentic systems, automação e agilidade por Felipe Fernandes"
+  title={`${t('talks.page.title')} | Felipe Fernandes`}
+  description={t('talks.page.subtitle')}
 >
   <main class="pt-24 pb-20">
     <div class="container-custom">
       <!-- Header -->
       <div class="max-w-4xl mx-auto text-center mb-16">
         <h1 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">
-          Palestras & Mentorias
+          {t('talks.page.title')}
         </h1>
         <p class="text-xl text-white/60 leading-relaxed">
-          Conhecimento que não circula, enferruja. Por isso, além de construir, eu compartilho —
-          em eventos, mentorias e comunidades.
+          {t('talks.page.subtitle')}
         </p>
       </div>
 
@@ -36,7 +51,7 @@ const mentorships = sortedTalks.filter(t => t.data.type === 'mentorship');
       {talksList.length > 0 && (
         <section class="mb-20">
           <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-8">
-            Palestras
+            {labelTalks}
           </h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -58,7 +73,7 @@ const mentorships = sortedTalks.filter(t => t.data.type === 'mentorship');
       {workshops.length > 0 && (
         <section class="mb-20">
           <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-8">
-            Workshops
+            {labelWorkshops}
           </h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -80,7 +95,7 @@ const mentorships = sortedTalks.filter(t => t.data.type === 'mentorship');
       {mentorships.length > 0 && (
         <section class="mb-20">
           <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-8">
-            Mentorias
+            {labelMentorships}
           </h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -98,19 +113,27 @@ const mentorships = sortedTalks.filter(t => t.data.type === 'mentorship');
         </section>
       )}
 
+      <!-- Empty state if nothing matches -->
+      {sortedTalks.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-white/40 text-lg font-mono">
+            {t('talks.empty')}
+          </p>
+        </div>
+      )}
+
       <!-- CTA Section -->
       <div class="mt-20 pt-12 border-t border-white/10 max-w-4xl mx-auto">
         <div class="bg-white/5 border border-white/10 rounded-lg p-8 text-center">
           <h3 class="text-2xl font-display font-bold text-white mb-4">
-            Interessado em palestras ou mentoria?
+            {labelCtaTitle}
           </h3>
           <p class="text-white/70 mb-6 leading-relaxed">
-            Trabalho com temas como engenharia de IA, agentic systems, automação de processos, flow metrics e governança de IA.
-            Entre em contato para conversarmos sobre como posso ajudar seu time ou evento.
+            {labelCtaDesc}
           </p>
           <div class="flex flex-wrap gap-4 justify-center">
-            <Button href="/contato" variant="primary">
-              Entre em Contato
+            <Button href={translatePath('/contato')} variant="primary">
+              {t('project.cta.contact')}
             </Button>
             <Button
               href="https://www.linkedin.com/in/felipefernand10/"

@@ -4,12 +4,18 @@ import type { GetStaticPaths } from 'astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
 export const getStaticPaths = (async () => {
-  const projects = await getCollection('projects');
+  const projects = await getCollection('projects', ({ data }) => {
+    return data.lang === 'pt-BR' || !data.lang;
+  });
 
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+  return projects.map((project) => {
+    // Remove o prefixo 'pt/' do slug para manter a URL amigável /projetos/[slug]
+    const cleanSlug = project.slug.replace(/^pt\//, '');
+    return {
+      params: { slug: cleanSlug },
+      props: { project },
+    };
+  });
 }) satisfies GetStaticPaths;
 
 const { project } = Astro.props;

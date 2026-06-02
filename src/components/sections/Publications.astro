@@ -2,8 +2,17 @@
 import { getCollection } from 'astro:content';
 import ArticleCard from '../content/ArticleCard.astro';
 import Button from '../ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const articles = await getCollection('articles');
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Filtra artigos por idioma (pt-BR como padrao/fallback)
+const articles = await getCollection('articles', ({ data }) => {
+  return lang === 'en' ? data.lang === 'en' : data.lang === 'pt-BR' || !data.lang;
+});
+
 const featuredArticles = articles
   .filter(a => a.data.featured)
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
@@ -15,10 +24,10 @@ const featuredArticles = articles
     <!-- Section Title -->
     <div class="max-w-4xl mx-auto text-center mb-12">
       <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-4">
-        Publicações
+        {t('publications.title')}
       </h2>
       <p class="text-white/60 leading-relaxed">
-        Artigos sobre agilidade, automação com IA, produtividade e liderança
+        {t('publications.subtitle')}
       </p>
     </div>
 
@@ -39,8 +48,8 @@ const featuredArticles = articles
 
     <!-- CTA -->
     <div class="text-center">
-      <Button href="/artigos" variant="secondary" size="lg">
-        Ver Todas as Publicações
+      <Button href={translatePath('/artigos')} variant="secondary" size="lg">
+        {t('publications.cta')}
       </Button>
     </div>
   </div>

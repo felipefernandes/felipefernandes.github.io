@@ -1,4 +1,10 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const socialLinks = [
   {
     name: 'LinkedIn',
@@ -42,24 +48,24 @@ const getIcon = (iconName: string) => {
       <div>
         <h3 class="text-lg font-display font-bold text-white mb-4">Felipe Fernandes</h3>
         <p class="text-white/40 text-sm leading-relaxed font-mono">
-          AI Solutions Engineer & Architect · Agentic Systems · LLM Pipelines · Automação de Fluxos de Trabalho
+          {t('footer.description')}
         </p>
       </div>
 
       <!-- Quick Links -->
       <div>
-        <h3 class="text-lg font-display font-bold text-white mb-4">Links</h3>
+        <h3 class="text-lg font-display font-bold text-white mb-4">{t('footer.links')}</h3>
         <nav class="flex flex-col gap-2">
-          <a href="/sobre" class="text-white/40 hover:text-white transition-colors text-sm">Sobre</a>
-          <a href="/projetos" class="text-white/40 hover:text-white transition-colors text-sm">Projetos</a>
-          <a href="/artigos" class="text-white/40 hover:text-white transition-colors text-sm">Artigos</a>
-          <a href="/palestras" class="text-white/40 hover:text-white transition-colors text-sm">Palestras</a>
+          <a href={translatePath('/sobre')} class="text-white/40 hover:text-white transition-colors text-sm uppercase font-mono tracking-wider">{t('nav.about')}</a>
+          <a href={translatePath('/projetos')} class="text-white/40 hover:text-white transition-colors text-sm uppercase font-mono tracking-wider">{t('nav.projects')}</a>
+          <a href={translatePath('/artigos')} class="text-white/40 hover:text-white transition-colors text-sm uppercase font-mono tracking-wider">{t('nav.articles')}</a>
+          <a href={translatePath('/palestras')} class="text-white/40 hover:text-white transition-colors text-sm uppercase font-mono tracking-wider">{t('nav.talks')}</a>
         </nav>
       </div>
 
       <!-- Social Links -->
       <div>
-        <h3 class="text-lg font-display font-bold text-white mb-4">Conecte-se</h3>
+        <h3 class="text-lg font-display font-bold text-white mb-4">{t('footer.connect')}</h3>
         <div class="flex gap-4">
           {socialLinks.map(({ name, href, icon }) => (
             <a
@@ -81,7 +87,7 @@ const getIcon = (iconName: string) => {
     <!-- Copyright -->
     <div class="mt-12 pt-8 border-t border-white/10 text-center">
       <p class="text-white/30 text-sm font-mono">
-        © {currentYear} Felipe Fernandes. Feito com Astro + Tailwind.
+        © {currentYear} Felipe Fernandes. {t('footer.builtWith')}
       </p>
     </div>
   </div>

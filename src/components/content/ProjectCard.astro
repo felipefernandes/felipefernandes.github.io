@@ -1,6 +1,7 @@
 ---
 import Card from '../ui/Card.astro';
 import Badge from '../ui/Badge.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 
 export interface Props {
   title: string;
@@ -13,11 +14,15 @@ export interface Props {
 
 const { title, description, tags, status, slug, featured = false } = Astro.props;
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const statusLabels = {
-  'open-source': 'Open Source',
-  'saas': 'SaaS',
-  'internal': 'Interno',
-  'archived': 'Arquivado',
+  'open-source': t('project.status.open-source'),
+  'saas': t('project.status.saas'),
+  'internal': t('project.status.internal'),
+  'archived': t('project.status.archived'),
 };
 
 const statusColors = {
@@ -26,9 +31,13 @@ const statusColors = {
   'internal': 'text-white/60',
   'archived': 'text-white/40',
 };
+
+// Limpa o prefixo do idioma no slug (ex: pt/notinha-app -> notinha-app)
+const cleanSlug = slug.replace(/^(pt|en)\//, '');
+const projectHref = translatePath(`/projetos/${cleanSlug}`);
 ---
 
-<Card href={`/projetos/${slug}`} hoverable={true} class="group">
+<Card href={projectHref} hoverable={true} class="group">
   <div class="flex flex-col">
     <!-- Header -->
     <div class="flex items-start justify-between mb-4">
@@ -37,7 +46,7 @@ const statusColors = {
       </h3>
       {featured && (
         <Badge variant="featured" class="ml-2">
-          Destaque
+          {t('project.badge.featured')}
         </Badge>
       )}
     </div>
