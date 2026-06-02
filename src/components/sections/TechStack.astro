@@ -1,6 +1,10 @@
 ---
 import Badge from '../ui/Badge.astro';
 import { getAllTechnologies } from '../../data/tech-stack';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const technologies = getAllTechnologies();
 ---
@@ -9,10 +13,10 @@ const technologies = getAllTechnologies();
   <div class="container-custom">
     <!-- Section Title -->
     <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-4 text-center">
-      Stack Técnico
+      {t('tech.title')}
     </h2>
     <p class="text-white/60 text-center mb-12 max-w-2xl mx-auto">
-      Ferramentas e tecnologias que uso no dia a dia para transformar complexidade em soluções práticas
+      {t('tech.subtitle')}
     </p>
 
     <!-- Tech Grid -->

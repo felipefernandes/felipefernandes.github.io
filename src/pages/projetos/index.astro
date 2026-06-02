@@ -2,8 +2,15 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/content/ProjectCard.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
-const projects = await getCollection('projects');
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Filtra projetos em português
+const projects = await getCollection('projects', ({ data }) => {
+  return data.lang === 'pt-BR' || !data.lang;
+});
 
 // Sort by order, then by year (descending)
 const sortedProjects = projects.sort((a, b) => {
@@ -18,27 +25,26 @@ const allTags = [...new Set(projects.flatMap(p => p.data.tags))].sort();
 ---
 
 <BaseLayout
-  title="Projetos | Felipe Fernandes"
-  description="Projetos de engenharia de IA, agentic systems e automação de processos desenvolvidos por Felipe Fernandes"
+  title={`${t('projects.page.title')} | Felipe Fernandes`}
+  description={t('projects.page.subtitle')}
 >
   <main class="pt-24 pb-20">
     <div class="container-custom">
       <!-- Header -->
       <div class="max-w-4xl mx-auto text-center mb-16">
         <h1 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">
-          Projetos
+          {t('projects.page.title')}
         </h1>
         <p class="text-xl text-white/60 leading-relaxed">
-          Uma seleção de projetos pessoais e profissionais que refletem minha abordagem:
-          automatizar o repetitivo, simplificar o complexo e usar IA como extensão prática do trabalho.
+          {t('projects.page.subtitle')}
         </p>
       </div>
 
-      <!-- Filter by tags (simple version without React) -->
+      <!-- Filter by tags -->
       <div class="max-w-6xl mx-auto mb-12">
         <div class="flex flex-wrap gap-2 justify-center">
           <span class="text-sm text-white/40 font-mono uppercase tracking-wider self-center mr-2">
-            Filtrar:
+            {t('projects.filter')}
           </span>
           {allTags.map((tag) => (
             <button
@@ -52,7 +58,7 @@ const allTags = [...new Set(projects.flatMap(p => p.data.tags))].sort();
             id="clear-filter"
             class="px-3 py-1 text-xs font-mono uppercase tracking-wider text-white/40 hover:text-white transition-colors"
           >
-            Limpar
+            {t('projects.clear')}
           </button>
         </div>
       </div>
@@ -73,10 +79,10 @@ const allTags = [...new Set(projects.flatMap(p => p.data.tags))].sort();
         ))}
       </div>
 
-      <!-- Empty state (hidden by default) -->
+      <!-- Empty state -->
       <div id="empty-state" class="hidden text-center py-20">
         <p class="text-white/40 text-lg font-mono">
-          Nenhum projeto encontrado com essa tag.
+          {t('projects.empty')}
         </p>
       </div>
     </div>

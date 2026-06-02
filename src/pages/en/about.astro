@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<BaseLayout
+  title="About | Felipe Fernandes"
+  description="AI Solutions Engineer & Architect. Specializing in designing and deploying autonomous agent systems, LLM pipelines, and workflow automation."
+>
+  <main class="pt-24 pb-20">
+    <div class="container-custom">
+      <article class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="mb-16">
+          <h1 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">
+            About me
+          </h1>
+          <p class="text-2xl text-white/60 leading-relaxed">
+            I spend my days turning operational complexity into simple, automated systems that actually work.
+          </p>
+        </header>
+
+        <!-- Content -->
+        <div class="prose prose-invert prose-lg max-w-none">
+          <section class="mb-16">
+            <p class="text-white/80 leading-relaxed mb-6">
+              I am a professional with over 10 years of experience at the intersection of agility, technology, and innovation.
+              I started as a web developer and instructor in Rio de Janeiro — teaching HTML, CSS, JavaScript, and Design Thinking
+              to classes where students had often never touched a line of code. It was during this time that I learned that a tech
+              professional's greatest skill is not mastering a programming language, but knowing how to communicate and simplify what is complex.
+            </p>
+
+            <p class="text-white/70 leading-relaxed mb-6">
+              In 2014, I co-founded <strong class="text-white">Code Club Brasil</strong>, the Brazilian branch of the Raspberry Pi Foundation.
+              Together with a team of 12 people spread across the country, we structured more than 630 coding clubs and reached
+              an estimated 15,000 children in all Brazilian states. It was the experience that taught me what it means to scale something
+              with purpose — and what it means to lead with far more passion than resources.
+            </p>
+
+            <p class="text-white/70 leading-relaxed mb-6">
+              Throughout my career, I went through digital project management, agile operations, and creative agency CTO before joining,
+              in 2018, <strong class="text-white">Gazeus Games</strong> — one of the largest casual games companies in Brazil.
+              I acted for years as Agile Coach & Operational Intelligence Lead, leading process modernization and architecting the organization's
+              first AI initiatives. In January 2026, I took on the role of <strong class="text-white">AI Solutions Engineer</strong>, focusing
+              full-time on designing and deploying agent-based systems and autonomous workflows. I also represent the tactical team on the
+              company's Executive AI Governance Council, designing guidelines and corporate strategies for AI adoption.
+            </p>
+
+            <p class="text-white/70 leading-relaxed mb-6">
+              In 2025, I published my first book: <strong class="text-white">"Contos dos Vieses — Fábulas para Líderes e Liderados"</strong>,
+              a collection of fables translating cognitive biases in management into accessible stories for anyone — technical or not.
+            </p>
+
+            <div class="bg-white/5 border border-white/10 rounded-lg p-6 my-8">
+              <p class="text-white/70 leading-relaxed mb-0">
+                <strong class="text-white">In the same year, I was diagnosed with ADHD at age 40.</strong> Instead of slowing down,
+                it became fuel. Understanding how my brain works helped me deepen my obsession with systems, workflows, and ways
+                to do more with less friction — both for myself and for the teams I work with.
+              </p>
+            </div>
+
+            <p class="text-white/80 leading-relaxed">
+              Today, I position myself as an <strong class="text-white">AI Solutions Engineer & Architect</strong>: someone with the technical
+              capability to design bespoke LLM pipelines and intelligent agents, and the strategic experience of over 10 years optimizing
+              the operational efficiency of technology and product teams.
+            </p>
+          </section>
+
+          <!-- Timeline -->
+          <section class="mb-16">
+            <h2 class="text-3xl lg:text-4xl font-display font-bold text-white mb-8 border-b border-white/10 pb-4">
+              Timeline
+            </h2>
+
+            <div class="space-y-8">
+              <!-- 2026 -->
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-20 text-right">
+                  <span class="text-sm font-mono text-white/40">2026</span>
+                </div>
+                <div class="flex-grow border-l-2 border-white/10 pl-6 pb-6">
+                  <h3 class="text-xl font-display font-semibold text-white mb-2">
+                    AI Solutions Engineer & Governance Council
+                  </h3>
+                  <p class="text-white/70 text-sm leading-relaxed">
+                    Assumed the AI Solutions Engineering seat at Gazeus Games, designing the architecture of agentic systems and joining the Executive AI Governance Council.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2025 -->
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-20 text-right">
+                  <span class="text-sm font-mono text-white/40">2025</span>
+                </div>
+                <div class="flex-grow border-l-2 border-white/10 pl-6 pb-6">
+                  <h3 class="text-xl font-display font-semibold text-white mb-2">
+                    Book "Contos dos Vieses" + ADHD Diagnosis
+                  </h3>
+                  <p class="text-white/70 text-sm leading-relaxed">
+                    Published my first book and was diagnosed with ADHD at 40 — both deeply transformed the way I work and think about systems.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2022 -->
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-20 text-right">
+                  <span class="text-sm font-mono text-white/40">2022</span>
+                </div>
+                <div class="flex-grow border-l-2 border-white/10 pl-6 pb-6">
+                  <h3 class="text-xl font-display font-semibold text-white mb-2">
+                    Flight Levels Certifications
+                  </h3>
+                  <p class="text-white/70 text-sm leading-relaxed">
+                    Certified in Flight Levels Strategy Design & Facilitation, deepening knowledge in agile organizational architecture.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2020-2022 -->
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-20 text-right">
+                  <span class="text-sm font-mono text-white/40">2020-22</span>
+                </div>
+                <div class="flex-grow border-l-2 border-white/10 pl-6 pb-6">
+                  <h3 class="text-xl font-display font-semibold text-white mb-2">
+                    Kanban Certifications
+                  </h3>
+                  <p class="text-white/70 text-sm leading-relaxed">
+                    KSI, KSD, TKP (Team Kanban Practitioner) — formalization of years of practice in flow metrics and Kanban.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2020 -->
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-20 text-right">
+                  <span class="text-sm font-mono text-white/40">2020</span>
+                </div>
+                <div class="flex-grow border-l-2 border-white/10 pl-6 pb-6">
+                  <h3 class="text-xl font-display font-semibold text-white mb-2">
+                    Management 3.0
+                  </h3>
+                  <p class="text-white/70 text-sm leading-relaxed">
+                    Certification in Management 3.0, aligning modern leadership practices with agile frameworks.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2018-2025 -->
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-20 text-right">
+                  <span class="text-sm font-mono text-white/40">2018-25</span>
+                </div>
+                <div class="flex-grow border-l-2 border-white/10 pl-6 pb-6">
+                  <h3 class="text-xl font-display font-semibold text-white mb-2">
+                    Gazeus Games
+                  </h3>
+                  <p class="text-white/70 text-sm leading-relaxed">
+                    Joined Gazeus Games as Agile Coach & Operational Intelligence Lead. Built the agility culture, flow metrics, and automated fundamental QA and engineering workflows.
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2014 -->
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-20 text-right">
+                  <span class="text-sm font-mono text-white/40">2014</span>
+                </div>
+                <div class="flex-grow border-l-2 border-white/10 pl-6 pb-6">
+                  <h3 class="text-xl font-display font-semibold text-white mb-2">
+                    Code Club Brasil Co-founder
+                  </h3>
+                  <p class="text-white/70 text-sm leading-relaxed">
+                    Co-founded Code Club Brasil (Raspberry Pi Foundation), structuring 630+ coding clubs and reaching ~15,000 children across Brazil.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CTA -->
+          <section class="mt-16 pt-8 border-t border-white/10">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p class="text-white/60 font-mono">
+                Want to know more about my work?
+              </p>
+              <div class="flex gap-3">
+                <Button href={translatePath('/projetos')} variant="primary">
+                  {t('hero.cta.projects')}
+                </Button>
+                <Button href={translatePath('/contato')} variant="secondary">
+                  {t('project.cta.contact')}
+                </Button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Prose styles */
+  :global(.prose strong) {
+    @apply text-white font-semibold;
+  }
+</style>

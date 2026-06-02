@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
 
 export interface Props {
   title: string;
@@ -15,11 +16,15 @@ export interface Props {
 
 const { title, description, tags, status, year, link, github } = Astro.props;
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const statusLabels = {
-  'open-source': 'Open Source',
-  'saas': 'SaaS',
-  'internal': 'Interno',
-  'archived': 'Arquivado',
+  'open-source': t('project.status.open-source'),
+  'saas': t('project.status.saas'),
+  'internal': t('project.status.internal'),
+  'archived': t('project.status.archived'),
 };
 ---
 
@@ -29,13 +34,13 @@ const statusLabels = {
       <article class="max-w-4xl mx-auto">
         <!-- Back button -->
         <a
-          href="/projetos"
+          href={translatePath('/projetos')}
           class="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors mb-8 font-mono uppercase tracking-wider"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
-          Voltar
+          {t('project.back')}
         </a>
 
         <!-- Header -->
@@ -74,7 +79,7 @@ const statusLabels = {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Ver Projeto
+                {t('project.view')}
               </Button>
             )}
             {github && (
@@ -99,14 +104,14 @@ const statusLabels = {
         <footer class="mt-16 pt-8 border-t border-white/10">
           <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-white/60 text-sm font-mono">
-              Gostou deste projeto?
+              {t('project.cta.title')}
             </p>
             <div class="flex gap-3">
-              <Button href="/projetos" variant="ghost">
-                Ver Mais Projetos
+              <Button href={translatePath('/projetos')} variant="ghost">
+                {t('project.cta.more')}
               </Button>
-              <Button href="/contato" variant="secondary">
-                Entre em Contato
+              <Button href={translatePath('/contato')} variant="secondary">
+                {t('project.cta.contact')}
               </Button>
             </div>
           </div>

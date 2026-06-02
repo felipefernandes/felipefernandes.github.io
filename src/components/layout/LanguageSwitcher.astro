@@ -1,0 +1,39 @@
+---
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+// Caminho atual
+const currentPath = Astro.url.pathname;
+
+// Caminhos para mudar de idioma
+const ptPath = translatePath(currentPath, 'pt');
+const enPath = translatePath(currentPath, 'en');
+---
+
+<div class="flex items-center gap-1.5 font-mono text-[11px] tracking-wider select-none">
+  <a
+    href={ptPath}
+    class={`px-2 py-0.5 rounded transition-all duration-300 border uppercase ${
+      lang === 'pt'
+        ? 'border-neon-cyan/30 bg-neon-cyan/10 text-white font-bold shadow-[0_0_8px_rgba(6,182,212,0.15)]'
+        : 'border-transparent text-white/40 hover:text-white hover:bg-white/5'
+    }`}
+    aria-label="Alterar idioma para Português"
+  >
+    PT
+  </a>
+  <span class="text-white/10">/</span>
+  <a
+    href={enPath}
+    class={`px-2 py-0.5 rounded transition-all duration-300 border uppercase ${
+      lang === 'en'
+        ? 'border-neon-cyan/30 bg-neon-cyan/10 text-white font-bold shadow-[0_0_8px_rgba(6,182,212,0.15)]'
+        : 'border-transparent text-white/40 hover:text-white hover:bg-white/5'
+    }`}
+    aria-label="Change language to English"
+  >
+    EN
+  </a>
+</div>

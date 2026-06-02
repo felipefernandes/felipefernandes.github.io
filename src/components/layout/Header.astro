@@ -1,11 +1,26 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
-  { href: '/sobre', label: 'sobre' },
-  { href: '/projetos', label: 'projetos' },
-  { href: '/contato', label: 'contato' },
+  { href: translatePath('/sobre'), label: t('nav.about') },
+  { href: translatePath('/projetos'), label: t('nav.projects') },
+  { href: translatePath('/contato'), label: t('nav.contact') },
 ];
+
+// Helper para verificar se o link esta ativo
+const isLinkActive = (href: string) => {
+  if (href === '/' || href === '/en') {
+    return currentPath === '/' || currentPath === '/en';
+  }
+  return currentPath.startsWith(href);
+};
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-bg-darker/80 backdrop-blur-md border-b border-white/10">
@@ -13,7 +28,7 @@ const navLinks = [
     <div class="flex items-center justify-between h-16">
       <!-- Logo/Nome -->
       <a
-        href="/"
+        href={translatePath('/')}
         class="text-xl font-display font-bold text-white hover:text-white/80 transition-colors duration-300"
       >
         Felipe Fernandes
@@ -26,8 +41,8 @@ const navLinks = [
             href={href}
             class={`
               text-sm font-mono uppercase tracking-wider transition-colors duration-300
-              ${currentPath.startsWith(href)
-                ? 'text-white'
+              ${isLinkActive(href)
+                ? 'text-white font-semibold'
                 : 'text-white/60 hover:text-white'
               }
             `}
@@ -35,18 +50,23 @@ const navLinks = [
             {label}
           </a>
         ))}
+        <div class="w-px h-4 bg-white/10 ml-2"></div>
+        <LanguageSwitcher />
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button
-        id="mobile-menu-button"
-        class="md:hidden p-2 text-white hover:text-white/80 transition-colors"
-        aria-label="Toggle mobile menu"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+      <!-- Mobile Menu Button and Switcher -->
+      <div class="flex items-center gap-4 md:hidden">
+        <LanguageSwitcher />
+        <button
+          id="mobile-menu-button"
+          class="p-2 text-white hover:text-white/80 transition-colors"
+          aria-label="Toggle mobile menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Mobile Navigation -->
@@ -57,8 +77,8 @@ const navLinks = [
             href={href}
             class={`
               text-sm font-mono uppercase tracking-wider transition-colors duration-300 py-2
-              ${currentPath.startsWith(href)
-                ? 'text-white'
+              ${isLinkActive(href)
+                ? 'text-white font-semibold'
                 : 'text-white/60 hover:text-white'
               }
             `}

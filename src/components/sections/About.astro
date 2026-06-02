@@ -1,5 +1,10 @@
 ---
 import Button from '../ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <section class="py-20 bg-transparent">
@@ -7,40 +12,34 @@ import Button from '../ui/Button.astro';
     <div class="max-w-4xl mx-auto">
       <!-- Section Title -->
       <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-8">
-        Sobre mim
+        {t('about.title')}
       </h2>
 
       <!-- Content -->
       <div class="prose prose-invert prose-lg max-w-none">
         <p class="text-white/80 leading-relaxed mb-6">
-          Sou um profissional com mais de 10 anos de experiência na interseção entre agilidade, tecnologia e inovação.
-          Comecei como desenvolvedor e instrutor de web no Rio de Janeiro — ensinando HTML, CSS, JavaScript e Design Thinking
-          para turmas que muitas vezes nunca tinham tocado em código.
+          {t('about.p1')}
         </p>
 
         <p class="text-white/70 leading-relaxed mb-6">
-          Em 2014, co-fundei o Code Club Brasil, o braço brasileiro da Raspberry Pi Foundation.
-          Junto com uma equipe de 12 pessoas espalhadas pelo país, estruturamos mais de 630 clubes de programação e chegamos
-          a estimados 15.000 crianças em todos os estados brasileiros.
+          {t('about.p2')}
         </p>
 
         <p class="text-white/70 leading-relaxed mb-6">
-          Em 2018, cheguei à Gazeus Games. Ao longo dessa jornada, estruturei a cultura de agilidade e inteligência operacional e, a partir de 2026, assumi como AI Solutions Engineer. Lidero o desenvolvimento de frotas de agentes autônomos e a governança executiva corporativa para adoção de IA.
+          {t('about.p3')}
         </p>
 
         <p class="text-white/70 leading-relaxed mb-8">
-          Em 2025, publiquei meu primeiro livro: "Contos dos Vieses", uma coleção de
-          narrativas que traduz vieses cognitivos da gestão em histórias acessíveis. No mesmo ano, fui diagnosticado com TDAH aos 40 anos
-          — o que virou combustível para aprofundar minha obsessão por sistemas e formas de fazer mais com menos fricção.
+          {t('about.p4')}
         </p>
 
         <!-- CTA -->
         <div class="flex gap-4">
-          <Button href="/sobre" variant="primary">
-            Leia Mais
+          <Button href={translatePath('/sobre')} variant="primary">
+            {t('about.cta.more')}
           </Button>
-          <Button href="/contato" variant="secondary">
-            Contato
+          <Button href={translatePath('/contato')} variant="secondary">
+            {t('about.cta.contact')}
           </Button>
         </div>
       </div>

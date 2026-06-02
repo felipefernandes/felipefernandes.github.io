@@ -2,8 +2,17 @@
 import { getCollection } from 'astro:content';
 import ProjectCard from '../content/ProjectCard.astro';
 import Button from '../ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const projects = await getCollection('projects');
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Filtra projetos por idioma (pt-BR como padrao/fallback)
+const projects = await getCollection('projects', ({ data }) => {
+  return lang === 'en' ? data.lang === 'en' : data.lang === 'pt-BR' || !data.lang;
+});
+
 const featuredProjects = projects
   .filter(p => p.data.featured)
   .sort((a, b) => (a.data.order || 999) - (b.data.order || 999))
@@ -15,10 +24,10 @@ const featuredProjects = projects
     <!-- Section Title -->
     <div class="max-w-4xl mx-auto text-center mb-12">
       <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-4">
-        Projetos em Destaque
+        {t('featured.title')}
       </h2>
       <p class="text-white/60 leading-relaxed">
-        Uma seleção dos meus projetos mais recentes em engenharia de IA, automação de fluxos e sistemas baseados em agentes
+        {t('featured.subtitle')}
       </p>
     </div>
 
@@ -38,8 +47,8 @@ const featuredProjects = projects
 
     <!-- CTA -->
     <div class="text-center">
-      <Button href="/projetos" variant="secondary" size="lg">
-        Ver Todos os Projetos
+      <Button href={translatePath('/projetos')} variant="secondary" size="lg">
+        {t('featured.cta')}
       </Button>
     </div>
   </div>

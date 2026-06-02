@@ -1,5 +1,10 @@
 ---
 import Button from '../ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <section class="py-20 bg-gradient-to-b from-bg-primary to-bg-darker">
@@ -7,11 +12,11 @@ import Button from '../ui/Button.astro';
     <div class="max-w-3xl mx-auto text-center">
       <!-- Section Title -->
       <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-6">
-        Vamos conversar?
+        {t('contact.title')}
       </h2>
 
       <p class="text-xl text-white/50 mb-12 leading-relaxed">
-        Trabalho com times e profissionais que querem modernizar processos com Agilidade e IA.
+        {t('contact.subtitle')}
       </p>
 
       <!-- Contact Options -->
@@ -49,8 +54,8 @@ import Button from '../ui/Button.astro';
 
       <!-- CTAs -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button href="/contato" variant="primary" size="lg">
-          Página de Contato
+        <Button href={translatePath('/contato')} variant="primary" size="lg">
+          {t('contact.cta.page')}
         </Button>
         <Button
           href="https://www.linkedin.com/in/felipefernand10/"

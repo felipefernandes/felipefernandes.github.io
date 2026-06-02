@@ -2,8 +2,16 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/content/ArticleCard.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const articles = await getCollection('articles');
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Filtra artigos em português
+const articles = await getCollection('articles', ({ data }) => {
+  return data.lang === 'pt-BR' || !data.lang;
+});
 
 // Sort by publishedAt (descending), featured first
 const sortedArticles = articles.sort((a, b) => {
@@ -16,30 +24,37 @@ const sortedArticles = articles.sort((a, b) => {
 const book = sortedArticles.filter(a => a.data.platform === 'book');
 const mediumArticles = sortedArticles.filter(a => a.data.platform === 'medium');
 const blogArticles = sortedArticles.filter(a => a.data.platform === 'blog');
+
+const labelBook = lang === 'en' ? 'Book' : 'Livro';
+const labelMediumTitle = lang === 'en' ? 'Medium Articles' : 'Artigos no Medium';
+const labelMediumDesc = lang === 'en' ? 'Publications on AI engineering (Agentic Systems, LLM Pipelines), automation and agility.' : 'Publicações sobre engenharia de IA (Agentic Systems, LLM Pipelines), automações e agilidade.';
+const labelBlogTitle = lang === 'en' ? 'Blog' : 'Blog';
+const labelBlogDesc = lang === 'en' ? 'Articles and tutorials published on this site.' : 'Artigos e tutoriais publicados neste site.';
+const labelCtaText = lang === 'en' ? 'Liked the content? Follow my publications on Medium or get in touch.' : 'Gostou do conteúdo? Acompanhe minhas publicações no Medium ou entre em contato.';
+const labelCtaFollow = lang === 'en' ? 'Follow on Medium' : 'Seguir no Medium';
 ---
 
 <BaseLayout
-  title="Artigos & Publicações | Felipe Fernandes"
-  description="Artigos sobre engenharia de IA, automação de processos, produtividade e agilidade por Felipe Fernandes"
+  title={`${t('articles.page.title')} | Felipe Fernandes`}
+  description={t('articles.page.subtitle')}
 >
   <main class="pt-24 pb-20">
     <div class="container-custom">
       <!-- Header -->
       <div class="max-w-4xl mx-auto text-center mb-16">
         <h1 class="text-4xl lg:text-6xl font-display font-bold text-white mb-6">
-          Artigos & Publicações
+          {t('articles.page.title')}
         </h1>
         <p class="text-xl text-white/60 leading-relaxed">
-          Escrevo sobre engenharia de IA, agentic systems, automação e agilidade organizacional.
-          Conhecimento que não circula, enferruja.
+          {t('articles.page.subtitle')}
         </p>
       </div>
 
-      <!-- Book Section (if exists) -->
+      <!-- Book Section -->
       {book.length > 0 && (
         <section class="mb-20">
           <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-8 text-center">
-            Livro
+            {labelBook}
           </h2>
           <div class="max-w-3xl mx-auto">
             {book.map((article) => (
@@ -62,10 +77,10 @@ const blogArticles = sortedArticles.filter(a => a.data.platform === 'blog');
         <section class="mb-20">
           <div class="max-w-4xl mx-auto mb-8">
             <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-4">
-              Artigos no Medium
+              {labelMediumTitle}
             </h2>
             <p class="text-white/60">
-              Publicações sobre engenharia de IA (Agentic Systems, LLM Pipelines), automações e agilidade.
+              {labelMediumDesc}
             </p>
           </div>
 
@@ -85,15 +100,15 @@ const blogArticles = sortedArticles.filter(a => a.data.platform === 'blog');
         </section>
       )}
 
-      <!-- Blog Articles (if exists) -->
+      <!-- Blog Articles -->
       {blogArticles.length > 0 && (
         <section>
           <div class="max-w-4xl mx-auto mb-8">
             <h2 class="text-2xl lg:text-4xl font-display font-bold text-white mb-4">
-              Blog
+              {labelBlogTitle}
             </h2>
             <p class="text-white/60">
-              Artigos e tutoriais publicados neste site.
+              {labelBlogDesc}
             </p>
           </div>
 
@@ -116,7 +131,7 @@ const blogArticles = sortedArticles.filter(a => a.data.platform === 'blog');
       <!-- CTA -->
       <div class="mt-20 pt-12 border-t border-white/10 text-center max-w-3xl mx-auto">
         <p class="text-white/60 mb-6">
-          Gostou do conteúdo? Acompanhe minhas publicações no Medium ou entre em contato.
+          {labelCtaText}
         </p>
         <div class="flex flex-wrap gap-4 justify-center">
           <a
@@ -125,13 +140,13 @@ const blogArticles = sortedArticles.filter(a => a.data.platform === 'blog');
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 px-6 py-3 bg-white text-bg-primary hover:bg-white/90 transition-all rounded-lg font-mono uppercase text-sm tracking-wider"
           >
-            Seguir no Medium
+            {labelCtaFollow}
           </a>
           <a
-            href="/contato"
+            href={translatePath('/contato')}
             class="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white hover:bg-white/5 hover:border-white/40 transition-all rounded-lg font-mono uppercase text-sm tracking-wider"
           >
-            Entre em Contato
+            {t('project.cta.contact')}
           </a>
         </div>
       </div>

@@ -13,6 +13,13 @@ export default defineConfig({
     }),
     react(),
   ],
+  i18n: {
+    defaultLocale: 'pt',
+    locales: ['pt', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   // Redirects para posts antigos do Jekyll
   redirects: {
     '/jekyll/update/2014/08/03/reencontro-animado/': '/arquivo/blog/reencontro-animado',
