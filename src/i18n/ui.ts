@@ -16,18 +16,18 @@ export const ui = {
     'nav.archive': 'arquivo',
 
     // Footer
-    'footer.description': 'AI Solutions Engineer & Architect · Agentic Systems · LLM Pipelines · Automação de Fluxos de Trabalho',
+    'footer.description': 'AI Solutions Engineer · Agentic Systems · LLM Pipelines · Automação de Fluxos de Trabalho',
     'footer.links': 'Links',
     'footer.connect': 'Conecte-se',
     'footer.builtWith': 'Feito com Astro + Tailwind.',
 
     // Hero Section
-    'hero.subtitle': 'AI Solutions Engineer & Architect · Agentic Systems · LLM Pipelines · Automação de Fluxos de Trabalho',
+    'hero.subtitle': 'AI Solutions Engineer · Agentic Systems · LLM Pipelines · Automação de Fluxos de Trabalho',
     'hero.tagline.1': 'Transformo',
     'hero.tagline.2': 'complexidade operacional',
     'hero.tagline.3': 'em sistemas',
     'hero.tagline.4': 'simples',
-    'hero.description': 'Especialista em arquitetar e implantar sistemas baseados em agentes autônomos e fluxos inteligentes de automação de processos, combinando excelência técnica com alta eficiência operacional.',
+    'hero.description': 'Projeto e implanto sistemas de agentes autônomos e automações inteligentes de fluxo de trabalho, unindo experiência prática em IA a mais de uma década otimizando operações de times de tecnologia e produto.',
     'hero.cta.projects': 'Ver Projetos',
     'hero.cta.contact': 'Fale Comigo',
 
@@ -35,7 +35,7 @@ export const ui = {
     'about.title': 'Sobre mim',
     'about.p1': 'Sou um profissional com mais de 10 anos de experiência na interseção entre agilidade, tecnologia e inovação. Comecei como desenvolvedor e instrutor de web no Rio de Janeiro — ensinando HTML, CSS, JavaScript e Design Thinking para turmas que muitas vezes nunca tinham tocado em código.',
     'about.p2': 'Em 2014, co-fundei o Code Club Brasil, o braço brasileiro da Raspberry Pi Foundation. Junto com uma equipe de 12 pessoas espalhadas pelo país, estruturamos mais de 630 clubes de programação e chegamos a estimados 15.000 crianças em todos os estados brasileiros.',
-    'about.p3': 'Em 2018, cheguei à Gazeus Games. Ao longo dessa jornada, estruturei a cultura de agilidade e inteligência operacional e, a partir de 2026, assumi como AI Solutions Engineer. Lidero o desenvolvimento de frotas de agentes autônomos e a governança executiva corporativa para adoção de IA.',
+    'about.p3': 'Em 2018, cheguei à Gazeus Games. Ao longo dessa jornada, estruturei a cultura de agilidade e inteligência operacional e, a partir de 2026, assumi como AI Solutions Engineer. Lidero o desenvolvimento da frota de agentes autônomos da empresa e sou o único representante de nível tático no Conselho Executivo de Governança de IA, contribuindo para as políticas e a estratégia de adoção de IA.',
     'about.p4': 'Em 2025, publiquei meu primeiro livro: "Contos dos Vieses", uma coleção de narrativas que traduz vieses cognitivos da gestão em histórias acessíveis. No mesmo ano, fui diagnosticado com TDAH aos 40 anos — o que virou combustível para aprofundar minha obsessão por sistemas e formas de fazer mais com menos fricção.',
     'about.cta.more': 'Leia Mais',
     'about.cta.contact': 'Contato',
@@ -127,18 +127,18 @@ export const ui = {
     'nav.archive': 'archive',
 
     // Footer
-    'footer.description': 'AI Solutions Engineer & Architect · Agentic Systems · LLM Pipelines · Workflow Automation',
+    'footer.description': 'AI Solutions Engineer · Agentic Systems · LLM Pipelines · Workflow Automation',
     'footer.links': 'Links',
     'footer.connect': 'Connect',
     'footer.builtWith': 'Built with Astro + Tailwind.',
 
     // Hero Section
-    'hero.subtitle': 'AI Solutions Engineer & Architect · Agentic Systems · LLM Pipelines · Workflow Automation',
+    'hero.subtitle': 'AI Solutions Engineer · Agentic Systems · LLM Pipelines · Workflow Automation',
     'hero.tagline.1': 'I transform',
     'hero.tagline.2': 'operational complexity',
     'hero.tagline.3': 'into simple',
     'hero.tagline.4': 'systems',
-    'hero.description': 'Specialist in architecting and deploying systems based on autonomous agents and intelligent workflow automation, combining technical excellence with high operational efficiency.',
+    'hero.description': 'I design and deploy autonomous agent systems and intelligent workflow automation, combining hands-on AI engineering with over a decade optimizing operations for technology and product teams.',
     'hero.cta.projects': 'View Projects',
     'hero.cta.contact': 'Get in Touch',
 
@@ -146,7 +146,7 @@ export const ui = {
     'about.title': 'About me',
     'about.p1': 'I am a professional with over 10 years of experience at the intersection of agility, technology, and innovation. I started as a web developer and instructor in Rio de Janeiro — teaching HTML, CSS, JavaScript, and Design Thinking to classes where students had often never touched a line of code.',
     'about.p2': 'In 2014, I co-founded Code Club Brasil, the Brazilian branch of the Raspberry Pi Foundation. Together with a team of 12 people spread across the country, we structured more than 630 coding clubs and reached an estimated 15,000 children in all Brazilian states.',
-    'about.p3': 'In 2018, I joined Gazeus Games. Throughout this journey, I built the culture of agility and operational intelligence and, starting in 2026, took on the role of AI Solutions Engineer. I lead the development of autonomous agent fleets and corporate executive governance for AI adoption.',
+    'about.p3': 'In 2018, I joined Gazeus Games. Throughout this journey, I built the culture of agility and operational intelligence and, starting in 2026, took on the role of AI Solutions Engineer. I lead the development of the company\'s autonomous agent fleet and serve as the sole tactical-level representative on the Executive AI Governance Council, contributing to AI adoption policy and strategy.',
     'about.p4': 'In 2025, I published my first book: "Contos dos Vieses", a collection of narratives translating cognitive biases in management into accessible stories. In the same year, I was diagnosed with ADHD at age 40 — which became fuel to deepen my obsession with systems and ways to do more with less friction.',
     'about.cta.more': 'Read More',
     'about.cta.contact': 'Contact',
