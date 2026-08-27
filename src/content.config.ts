@@ -1,7 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const projects = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -9,8 +11,8 @@ const projects = defineCollection({
     status: z.enum(['open-source', 'saas', 'internal', 'archived']),
     featured: z.boolean().default(false),
     year: z.number(),
-    link: z.string().url().optional(),
-    github: z.string().url().optional(),
+    link: z.url().optional(),
+    github: z.url().optional(),
     image: z.string().optional(),
     order: z.number().default(999),
     lang: z.enum(['pt-BR', 'en']).default('pt-BR'),
@@ -18,12 +20,12 @@ const projects = defineCollection({
 });
 
 const articles = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
     publishedAt: z.date(),
-    url: z.string().url().optional(),
+    url: z.url().optional(),
     platform: z.enum(['medium', 'book', 'blog']),
     featured: z.boolean().default(false),
     tags: z.array(z.string()),
@@ -33,21 +35,21 @@ const articles = defineCollection({
 });
 
 const talks = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/talks' }),
   schema: z.object({
     title: z.string(),
     event: z.string(),
     type: z.enum(['talk', 'workshop', 'mentorship', 'community']),
     date: z.date(),
     description: z.string(),
-    link: z.string().url().optional(),
-    videoUrl: z.string().url().optional(),
+    link: z.url().optional(),
+    videoUrl: z.url().optional(),
     lang: z.enum(['pt-BR', 'en']).default('pt-BR'),
   }),
 });
 
 const archive = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/archive' }),
   schema: z.object({
     title: z.string(),
     date: z.date(),
