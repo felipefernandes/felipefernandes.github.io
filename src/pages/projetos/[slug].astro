@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
@@ -9,8 +9,8 @@ export const getStaticPaths = (async () => {
   });
 
   return projects.map((project) => {
-    // Remove o prefixo 'pt/' do slug para manter a URL amigável /projetos/[slug]
-    const cleanSlug = project.slug.replace(/^pt\//, '');
+    // Remove o prefixo 'pt/' do id para manter a URL amigável /projetos/[slug]
+    const cleanSlug = project.id.replace(/\.md$/, '').replace(/^pt\//, '');
     return {
       params: { slug: cleanSlug },
       props: { project },
@@ -19,7 +19,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 ---
 
 <ProjectLayout

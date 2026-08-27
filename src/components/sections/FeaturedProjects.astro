@@ -39,7 +39,7 @@ const featuredProjects = projects
           description={project.data.description}
           tags={project.data.tags}
           status={project.data.status}
-          slug={project.slug}
+          slug={project.id.replace(/\.md$/, '')}
           featured={project.data.featured}
         />
       ))}
