@@ -3,7 +3,7 @@ title: "Notinha App"
 description: "Family app for automated financial control with smart expense categorization by AI"
 tags: ["Next.js", "React", "Firebase", "Gemini API", "n8n", "AI-Augmented Software Engineering"]
 status: "open-source"
-featured: true
+featured: false
 year: 2026
 order: 1
 lang: "en"
